@@ -53,12 +53,18 @@ def open_workflow3():
     website_urls = ['http://lyfjourney.com/', 'https://www.instagram.com/lyfjourney/', 'https://www.facebook.com/profile.php?id=100063472273527', 'https://drive.google.com/drive/u/4/my-drive']
 
 def open_in_chrome(urls):
+    # Path to your Chrome installation
+    chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+
+    # Open a new Chrome window with the group of tabs
+    subprocess.Popen([chrome_path, '--new-window'] + urls)
+
     # Open a new Chrome window
-    subprocess.Popen(['start', 'chrome', '--new-window'], shell=True)
+    # subprocess.Popen(['start', 'chrome', '--new-window'], shell=True)
 
     # Wait for the window to open (adjust the delay as needed)
     # You can also use other methods to ensure the window is fully loaded
-    time.sleep(3)
-    for url in urls:
-        webbrowser.open_new_tab(url)
+    # time.sleep(3)
+    # for url in urls:
+    #     webbrowser.open_new_tab(url)
         # webbrowser.get('chrome').open_new(url)
