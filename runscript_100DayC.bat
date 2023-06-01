@@ -1,2 +1,2 @@
 @echo off
-"C:\Users\User\Desktop\AutomationScripts\venv\Scripts\python.exe" "C:\Users\User\Desktop\AutomationScripts\venv\workflow_100DayC.py"
+python "C:\Users\User\Desktop\AutomationScripts\workflow_100DayC.py"
