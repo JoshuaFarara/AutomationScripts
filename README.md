@@ -55,9 +55,6 @@ The program utilizes Python and various libraries, including `subprocess` and `w
 - The program currently supports opening websites in a new browser window but does not support multiple separate browser instances.
 - The behavior of macro keys and their assignment may vary depending on the macro software or hardware being used.
 
-## License
-This program is licensed under the [MIT License](LICENSE).
-
 ## Contributions
 Contributions to the project are welcome. Feel free to open issues or submit pull requests on the project repository.
 
