@@ -43,14 +43,26 @@ def open_workflow1():
     website_urls = ['https://www.geeksforgeeks.org/100-days-of-code-a-complete-guide-for-beginners-and-experienced/', 'https://www.geeksforgeeks.org/python-programming-language/',
 'https://www.geeksforgeeks.org/introduction-to-python/', 'https://www.geeksforgeeks.org/python-programming-examples/']
     open_in_chrome(website_urls)
+    print("Workflow1, loaded successfully.")
 
 def open_workflow2():
     website_urls = ['https://squareup.com/login?return_to=%2Fappointments%2Fcalendar/', 'https://analytics.google.com/analytics/web/?authuser=4#/report-home/a149998776w212601873p205023173',
 'https://fararatheartist.com/', 'https://fararatheartist.com/bio-link/', 'https://bladedmoths.com/', 'https://www.instagram.com/fararatheartist/', 'https://studio.youtube.com/channel/UC2JvDDY9vZM57vKPkRraaAw/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D']
     open_in_chrome(website_urls)
+    print("Workflow2, loaded successfully.")
 
 def open_workflow3():
     website_urls = ['http://lyfjourney.com/', 'https://www.instagram.com/lyfjourney/', 'https://www.facebook.com/profile.php?id=100063472273527', 'https://drive.google.com/drive/u/4/my-drive']
+    open_in_chrome(website_urls)
+    print("Workflow3, loaded successfully.")
+
+def open_workflow4():
+    website_urls = ['https://tsheets.intuit.com/#w_timesheets_v2', 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox', 'https://drive.google.com/drive/my-drive']
+    open_in_chrome(website_urls)
+    # for url in website_urls:
+    #     webbrowser.open_new_tab(url)
+    # webbrowser.open(website_urls, new=2)
+    print("Workflow4, loaded successfully.")
 
 def open_in_chrome(urls):
     # Path to your Chrome installation
