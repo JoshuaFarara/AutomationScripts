@@ -64,6 +64,14 @@ def open_workflow4():
     # webbrowser.open(website_urls, new=2)
     print("Workflow4, loaded successfully.")
 
+def open_workflow5():
+    website_urls = ['https://my.georgiasouthern.edu/portal/portal.php', 'https://georgiasouthern.desire2learn.com/d2l/home/742330', 'https://georgiasouthern.desire2learn.com/d2l/home/742625']
+    open_in_chrome(website_urls)
+    # for url in website_urls:
+    #     webbrowser.open_new_tab(url)
+    # webbrowser.open(website_urls, new=2)
+    print("Workflow4, loaded successfully.")
+
 def open_in_chrome(urls):
     # Path to your Chrome installation
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
