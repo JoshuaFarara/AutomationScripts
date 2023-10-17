@@ -11,5 +11,3 @@ myLabel = Label(root, text="Hello Joshua!")
 myLabel.pack()
 
 root.mainloop()
-
-# lets explore what we have
