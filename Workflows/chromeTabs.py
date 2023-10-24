@@ -89,3 +89,9 @@ def open_in_chrome(urls):
     # for url in urls:
     #     webbrowser.open_new_tab(url)
         # webbrowser.get('chrome').open_new(url)
+
+
+def add_url_to_workflow(workflow):
+    url_to_add = input("Enter a new url...")
+    return url_to_add
+    
