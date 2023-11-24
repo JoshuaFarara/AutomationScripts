@@ -57,7 +57,7 @@ def workflow_builder():
     workflow = Workflow()
     workflow.set_workflow_name('WorkflowBuildTest')
     workflow.add_url_to_workflow()
-    return 
+    return workflow
 
 
 # Example usage:
