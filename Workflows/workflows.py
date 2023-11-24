@@ -17,7 +17,7 @@ class Workflow:
             print("Workflow name not set. Please set the name first.")
             return
         
-        url_to_add = input("Enter a new URL for {self.workflow_name}: ")
+        url_to_add = input(f"Enter a new URL for {self.workflow_name}: ")
         self.website_urls.append(url_to_add)
         print(f"Added {url_to_add} to {self.workflow_name} workflow.")
     
@@ -30,9 +30,6 @@ class Workflow:
         if not self.website_urls:
             print(f"No URLs added to {self.workflow_name} workflow yet.")
             return
-        
-        website_urls = ['https://www.geeksforgeeks.org/100-days-of-code-a-complete-guide-for-beginners-and-experienced/', 'https://www.geeksforgeeks.org/python-programming-language/',
-                        'https://www.geeksforgeeks.org/introduction-to-python/', 'https://www.geeksforgeeks.org/python-programming-examples/']
         
         # Path to your Chrome installation
         chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
@@ -50,4 +47,26 @@ class Workflow:
 
 # Now we need to create a workflow process. 
 def build_workflow():
-    pass
+    workflow_name = input("Enter the name for your workflow: ")
+    workflow_instance = Workflow()
+    setattr(workflow_instance, workflow_name, workflow_instance)
+    workflow_instance.set_workflow_name(workflow_name)
+    workflow_instance.add_url_to_workflow()
+
+def workflow_builder():
+    workflow = Workflow()
+    workflow.set_workflow_name('WorkflowBuildTest')
+    workflow.add_url_to_workflow()
+    return 
+
+
+# Example usage:
+workflow_name = input("Enter the name for your workflow: ")
+workflow_instance = Workflow()
+setattr(workflow_instance, workflow_name, workflow_instance)
+
+# Setting the workflow name
+workflow_instance.set_workflow_name(workflow_name)
+workflow_instance.add_url_to_workflow()
+
+WFTest.open_workflow()
