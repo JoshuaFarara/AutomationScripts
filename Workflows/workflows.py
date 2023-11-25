@@ -74,54 +74,28 @@ class WorkflowManager:
             print(f"Workflow '{workflow_name}' not found in the manager.")
     
 class WorkflowOpener(WorkflowManager):
-    def open_workflow(self, workflow_name):
-        chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
 
-        if not self.workflow_name:
-            print("Workflow name not set. Please set the name first.")
-            return
+    def __init__(self, workflow_manager):
+        self.workflow_manager = workflow_manager
+
+    def open_workflow(self, workflow_name):
+        # if not workflow_name:
+        #     print("Workflow name not set. Please set the name first.")
+        #     return
         
-        if not self.website_urls:
-            print(f"No URLs added to {self.workflow_name} workflow yet.")
-            return
+        # if not .website_urls:
+        #     print(f"No URLs added to {workflow_name} workflow yet.")
+        #     return
         
-        workflow_to_open = self.workflows.get(workflow_name)
+        workflow_to_open = self.workflow_manager.workflows.get(workflow_name)
         if workflow_to_open:
+            chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
             # Open the workflow using subprocess or any other method
             print(f"Opening workflow '{workflow_name}'...")
             # Add your code to open the workflow (e.g., subprocess or webbrowser)
             # For example:
             # webbrowser.open_new_tab(workflow_to_open.website_urls[0])  # Open the first URL for demonstration
             subprocess.Popen([chrome_path, '--new-window'] + workflow_to_open.website_urls)
-            print(f"Opened {self.workflow_name} workflow in Chrome successfully.")
+            print(f"Opened {workflow_name} workflow in Chrome successfully.")
         else:
             print(f"Workflow '{workflow_name}' not found.")
-
-# Example usage:
-# workflow_manager = WorkflowManager()
-# new_workflow = Workflow.workflow_builder()
-# workflow_manager.add_workflow(new_workflow.workflow_name, new_workflow)
-# workflow_manager.view_workflow_urls(new_workflow.workflow_name)
-# workflow_name = input("Enter the name for the new workflow: ")
-
-
-# Storing the created workflow in the data structure
-# workflows[workflow_name] = new_workflow
-
-# # Accessing the stored workflow by name
-# stored_workflow = workflows.get(workflow_name)
-
-# # You can use stored_workflow to perform operations or access its methods
-# if stored_workflow:
-#     stored_workflow.add_url_to_workflow()
-#     # stored_workflow.open_workflow()
-
-# # setattr(workflow_instance, workflow_name, workflow_instance)
-
-# # # Setting the workflow name
-# # workflow_instance.set_workflow_name(workflow_name)
-# # workflow_instance.add_url_to_workflow()
-
-# # WFTest.open_workflow()
-# for workflow in workflows:
-#     print(f"Workflow Name: {workflow_name}")
