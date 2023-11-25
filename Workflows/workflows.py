@@ -13,7 +13,7 @@ class Workflow:
         self.workflow_name = name
        
 
-    def add_url_to_workflow(self):
+    def add_url(self):
         if not self.workflow_name:
             print("Workflow name not set. Please set the name first.")
             return
@@ -22,28 +22,13 @@ class Workflow:
         self.website_urls.append(url_to_add)
         print(f"Added {url_to_add} to {self.workflow_name} workflow.")
     
-    
-    def open_workflow(self):
-        if not self.workflow_name:
-            print("Workflow name not set. Please set the name first.")
-            return
-        
-        if not self.website_urls:
-            print(f"No URLs added to {self.workflow_name} workflow yet.")
-            return
-        
-        # Path to your Chrome installation
-        chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-        # Open a new Chrome window with the group of tabs
-        subprocess.Popen([chrome_path, '--new-window'] + self.website_urls)
-        print(f"Opened {self.workflow_name} workflow in Chrome successfully.")
 
     # Now we need to create a workflow process. 
     @classmethod
     def workflow_builder(cls):
         workflow = cls()
         workflow.set_workflow_name()
-        workflow.add_url_to_workflow()
+        workflow.add_url()
         print(f"The {workflow.workflow_name} workflow was built successfully.")
         for url in workflow.website_urls:
             print(url)
@@ -73,19 +58,25 @@ class WorkflowManager:
         else:
             print(f"Workflow '{workflow_name}' not found in the manager.")
     
+    def add_url_to_workflow(self, workflow_name):
+        if workflow_name in self.workflows:
+            self.workflows[workflow_name].add_url()
+        else:
+            print(f"Workflow '{workflow_name}' not found in the manager.")
+
 class WorkflowOpener(WorkflowManager):
 
     def __init__(self, workflow_manager):
         self.workflow_manager = workflow_manager
 
     def open_workflow(self, workflow_name):
-        # if not workflow_name:
-        #     print("Workflow name not set. Please set the name first.")
-        #     return
+        if not workflow_name:
+            print("Workflow name not set. Please set the name first.")
+            return
         
-        # if not .website_urls:
-        #     print(f"No URLs added to {workflow_name} workflow yet.")
-        #     return
+        if not self.website_urls:
+            print(f"No URLs added to {workflow_name} workflow yet.")
+            return
         
         workflow_to_open = self.workflow_manager.workflows.get(workflow_name)
         if workflow_to_open:
