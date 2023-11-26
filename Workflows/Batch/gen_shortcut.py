@@ -20,6 +20,6 @@ batch_file_path = 'C:\\Users\\User\\Desktop\\AutomationScripts\\Workflows\\Batch
 shortcut_path = 'C:\\Users\\User\\Desktop\\runscript_100DayC.lnk'
 working_dir = 'C:\\Users\\User\\Desktop\\AutomationScripts\\Workflows\\Batch'
 
-user_shortcut_key = input("Enter the shortcut key combination (e.g., Ctrl+Alt+F): ")
+user_shortcut_key = input("Enter the shortcut key combination (e.g., Ctrl+Alt+F or Ctrl+Shift+F): ")
 
 create_shortcut(batch_file_path, shortcut_path,  working_directory=working_dir, shortcut_key=user_shortcut_key)

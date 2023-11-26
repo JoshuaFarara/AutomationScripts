@@ -30,8 +30,8 @@ def dashboard():
 
 @app.route('/createwf')
 def createwf():
-    # return render_template('index.html')
-    return "Build the create workflow page here."
+    return render_template('createwf.html')
+    # return "Build the create workflow page here."
 
 @app.route('/manage')
 def manage():
