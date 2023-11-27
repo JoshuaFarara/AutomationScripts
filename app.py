@@ -1,23 +1,43 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
-from datetime import timedelta
-from datetime import datetime
-from Workflows.workflows import Workflow, WorkflowManager, WorkflowOpener
+from flask_migrate import Migrate
+from datetime import timedelta, datetime
+from flask import json
+import subprocess
+# from Workflows.workflows import Workflow, WorkflowManager, WorkflowOpener
 
-app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "autowf"
 app.permanent_session_lifetime = timedelta(minutes=5)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///workflows.db'
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-# class Todo(db.model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     content = db.Column(db.String(200), nullable=False)
-#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+class workflows(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    workflow_name = db.Column(db.String(100), nullable=False)
+    website_urls = db.Column(db.String(500), nullable=False)
+    hotkeys = db.Column(db.String(100))
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     def __repr__(self):
-#         return '<Task %r>' % self.id
+    def __init__(self, workflow_name, website_urls, hotkeys):
+        self.workflow_name = workflow_name #
+        self.website_urls = website_urls
+        self.hotkeys = hotkeys
+
+# workflow_to_open = workflows.get(workflows.workflow_name)
+# if workflow_to_open:
+#     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+#     # Open the workflow using subprocess or any other method
+#     print(f"Opening workflow '{workflows.workflow_name}'...")
+#     # Add your code to open the workflow (e.g., subprocess or webbrowser)
+#     # For example:
+#     # webbrowser.open_new_tab(workflow_to_open.website_urls[0])  # Open the first URL for demonstration
+#     subprocess.Popen([chrome_path, '--new-window'] + workflow_to_open.website_urls)
+#     print(f"Opened {workflows.workflow_name} workflow in Chrome successfully.")
+# else:
+#     print(f"Workflow '{workflows.workflow_name}' not found.")
+    
 
 @app.route('/home')
 @app.route('/')
@@ -26,19 +46,59 @@ def index():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template('dashboard.html')
+    all_workflows = workflows.query.order_by(workflows.date_created).all()
+    chunk_size = 4
+    divided_workflows = [all_workflows[i:i + chunk_size] for i in range(0, len(all_workflows), chunk_size)]
+    return render_template('dashboard.html', divided_workflows=divided_workflows)
     # return 'Build the dashboard page here.'
 
-@app.route('/createwf') # methods='POST'
+@app.route('/createwf', methods=['POST', 'GET']) # 
 def createwf():
-    # workflow_name = request.form['workflow_name']
-    # urls = request.form.getlist('url')  # Assuming your HTML form input is named 'url'
+    if request.method == 'POST':
+        workflow_name = request.form['workflow_name']
+        website_urls = request.form['url_input_1']
+        # POSSIBLE UPDATES TO HANDLE MILTIPLE URLS
+        #  Retrieve URL count
+        # url_count = int(request.form.get('urlCount', 1))
 
-    # new_workflow = Workflow(workflow_name=workflow_name, website_urls=urls)
+        # if url_count == 1:
+        #     # If only one URL is provided, store it as a string
+        #     website_urls = request.form['url_input_1']
+        # else:
+        #     website_urls_list = [request.form[f'url_input_{i}'] for i in range(1, url_count + 1)]
+        #     website_urls = json.dumps(website_urls_list)
+        
+        hotkeys = request.form['hotkeys']
+        new_workflow = workflows(workflow_name=workflow_name, website_urls=website_urls, hotkeys=hotkeys)
 
-    return render_template('createwf.html')
+        try:
+            db.session.add(new_workflow)
+            db.session.commit()
+            return redirect('/dashboard')
+        except Exception as e:
+            db.session.rollback()  # Roll back the session changes
+            print(f"Error occurred: {str(e)}")
+            return 'There was an issue creating your workflow.'
+    else:
+        # all_workflows = workflows.query.order_by(workflows.date_created).all()
+        return render_template('createwf.html') # , all_workflows=all_workflows
+    
+    # website_urls = request.form.getlist('website_urls')  # Assuming your HTML form input is named 'url'
+    # hotkeys = request.form['hotkeys']
+    # new_workflow = Workflow(workflow_name=workflow_name, website_urls=website_urls, hotkeys=hotkeys)
+
+    
     # return "Build the create workflow page here."
+@app.route('/delete/<int:id>')
+def delete(id):
+    worfkflow_to_delete = workflows.query.get_or_404(id)
 
+    try:
+        db.session.delete(worfkflow_to_delete)
+        db.session.commit()
+        return redirect('/dashboard')
+    except:
+        return 'There was a problem deleting that workflow.'
 
 @app.route('/manage')
 def manage():
@@ -82,3 +142,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
