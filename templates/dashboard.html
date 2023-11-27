@@ -9,142 +9,89 @@
                 <h2>Dashboard</h2>
             </div>
 
-            <div class="main-cards">
 
-                <div class="card">
-                    <div class="card-inner">
-                        <h1>Workflow Name</h1> 
+            {% for workflows_chunk in divided_workflows %}
+                <div class="main-cards">
+                    {% for workflow in workflows_chunk %}
+                    <div class="card">
+                        <div class="card-inner">
+                            <h1>{{ workflow.workflow_name }}</h1> 
+                        </div>
+                        <h3>Workflow Details:</h3>
+                        <ul class="card-list">
+                            <li class="card-list-item">
+                                <span>{{ workflow.website_urls }}</span>
+                            </li>
+                            <li class="card-list-item">
+                                <span>{{ workflow.hotkeys }}</span>
+                            </li>
+                            <a href="#" class="workflow-link">
+                                <span class="material-icons-outlined">edit</span> Manage Workflow
+                            </a>
+                            <a href="#" class="workflow-link" onclick="openWorkflow('{{ workflow.website_urls}}')">
+                                <span class="material-icons-outlined">open_in_browser</span> Open Workflow
+                            </a>
+                            <a href="/delete/{{ workflow.id }}" class="workflow-link delete-link">
+                                <span class="material-icons-outlined">delete</span> Delete Workflow
+                            </a>
+                        </ul>
                     </div>
-                    <h3>Urls:</h3>
-                    <ul class="card-list">
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <span class="material-icons-outlined">edit</span> Manage Workflow
-                        <span class="material-icons-outlined">open_in_browser</span> Open Workflow
-                      </ul>
+                    {% endfor %}
                 </div>
+            {% endfor %}
 
-                <div class="card">
-                    <div class="card-inner">
-                        <h1>Workflow Name</h1> 
+            <!-- {% for workflows_chunk in divided_workflows %}
+                <div class="main-cards">
+                    {% for workflow in workflows_chunk %}
+                    <div class="card">
+                        <div class="card-inner">
+                            <h1>{{ workflow.workflow_name }}</h1> 
+                        </div>
+                        <h3>Workflow Details:</h3>
+                        <ul class="card-list">
+                            {% if workflow.website_urls|length == 1 %}
+                                <li class="card-list-item">
+                                    <span>{{ workflow.website_urls[0] }}</span>
+                                </li>
+                            {% else %}
+                                {% for url in workflow.website_urls|default([]) %}
+                                    <li class="card-list-item">
+                                        <span>{{ url }}</span>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                            <li class="card-list-item">
+                                <span>{{ workflow.hotkeys }}</span>
+                            </li>
+                            <span class="material-icons-outlined">edit</span> Manage Workflow
+                            <span class="material-icons-outlined">open_in_browser</span> Open Workflow
+                        </ul>
                     </div>
-                    <h3>Urls:</h3>
-                    <ul class="card-list">
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <span class="material-icons-outlined">edit</span> Manage Workflow
-                        <span class="material-icons-outlined">open_in_browser</span> Open Workflow
-                      </ul>
+                    {% endfor %}
                 </div>
+            {% endfor %} -->
 
+
+            <!-- <div class="main-cards"> -->
                 <div class="card">
                     <div class="card-inner">
-                        <h1>Workflow Name</h1> 
-                    </div>
-                    <h3>Urls:</h3>
-                    <ul class="card-list">
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <span class="material-icons-outlined">edit</span> Manage Workflow
-                        <span class="material-icons-outlined">open_in_browser</span> Open Workflow
-                      </ul>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                      <h3>Scheduler/Timer</h3>
-                      <span class="material-icons-outlined">schedule</span>
+                        <h3>Scheduler/Timer</h3>
+                        <span class="material-icons-outlined">schedule</span>
                     </div>
                     <div>
                         <p>Add Workflows to the Schedule</p>
                     </div>
                 </div>
-                
-
-
-
-            </div>
+            <!-- </div> -->
             
-            <div class="main-cards">
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h1>Workflow Name</h1> 
-                    </div>
-                    <h3>Urls:</h3>
-                    <ul class="card-list">
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <span class="material-icons-outlined">edit</span> Manage Workflow
-                        <span class="material-icons-outlined">open_in_browser</span> Open Workflow
-                      </ul>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <h1>Workflow Name</h1> 
-                    </div>
-                    <h3>Urls:</h3>
-                    <ul class="card-list">
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <li class="card-list-item">
-                            <span>dashboard</span>
-                        </li>
-                        <span class="material-icons-outlined">edit</span> Manage Workflow
-                        <span class="material-icons-outlined">open_in_browser</span> Open Workflow
-                      </ul>
-                </div>
-
-            </div>
-
         </main>
-    </div>
+        <script>
+            function openWorkflow(url) {
+                // Replace this with the actual URL
+                var workflowURL = url; // The URL to be opened in Chrome
+        
+                // Open the URL in Chrome
+                window.open(workflowURL, '_blank');
+            }
+        </script>
 {% endblock %}

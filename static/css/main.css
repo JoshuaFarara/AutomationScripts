@@ -182,3 +182,17 @@ body {
     justify-content: space-between;
 }
 
+/* Style for links with icons */
+.workflow-link {
+    display: inline-block;
+    margin-right: 10px; /* Adjust spacing between links */
+    text-decoration: none; /* Remove default link underline */
+    color: #333; /* Change link color */
+}
+
+/* Style for delete link */
+.delete-link {
+    color: rgb(161, 23, 23); /* Change color for delete link */
+}
+
+

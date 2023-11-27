@@ -8,32 +8,29 @@
             <div class="main-title">
                 <h2>Create New Workflow</h2>
             </div>
-
-            <form action="/save_workflow" method="post">
-                <label for="workflow_name">Name Your Workflow:</label><br>
-                <input type="text" id="workflow_name" name="workflow_name"><br><br>
-                
-                <label for="browser_select">Select Browser:</label><br>
-                <select id="browser_select" name="browser_select">
-                    <option value="Chrome">Chrome</option>
-                </select><br><br>
-                
-                <div id="urls_container">
-                    <div class="url_input">
-                        <label for="url_input_1">Add New URL:</label>
-                        <input type="text" id="url_input_1" name="url_input_1">
-                        <button type="button" class="delete_url_button">Delete URL</button>
+            <div>
+                <form action="/createwf" method="post">
+                    <label for="workflow_name">Name Your Workflow:</label><br>
+                    <input type="text" id="workflow_name" name="workflow_name"><br><br>
+                    
+                    
+                    <div id="urls_container">
+                        <div class="url_input">
+                            <label for="url_input_1">Add New URL:</label>
+                            <input type="text" id="url_input_1" name="url_input_1">
+                            <button type="button" class="delete_url_button">Delete URL</button>
+                        </div>
                     </div>
-                </div>
-        
-                <button type="button" id="add_url_button">Add Another URL</button><br><br>
-        
+            
+                    <button type="button" id="add_url_button">Add Another URL</button><br><br>
+            
 
-                <label for="url_input">Assign Workflow Hotkeys: e.g. Ctrl+Alt+W</label><br>
-                <input type="text" id="url_input" name="url_input"><br><br>
-                
-                <input type="submit" value="Save Workflow">
-            </form>
+                    <label for="hotkeys">Assign Workflow Hotkeys: e.g. Ctrl+Alt+W</label><br>
+                    <input type="text" id="hotkeys" name="hotkeys"><br><br>
+                    
+                    <input type="submit" value="Save Workflow">
+                </form>
+            </div>
         </main>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -54,10 +51,19 @@
                 });
 
                 urlsContainer.addEventListener('click', function (event) {
-                if (event.target.classList.contains('delete_url_button')) {
-                    event.target.parentElement.remove();
-                }
+                    if (event.target.classList.contains('delete_url_button')) {
+                        event.target.parentElement.remove();
+                    }
+                });
+
+                var form = document.querySelector('form');
+                form.addEventListener('submit', function () {
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'urlCount';
+                    hiddenInput.value = urlCount;
+                    form.appendChild(hiddenInput);
+                });    
             });
-        });
     </script>
 {% endblock %}
