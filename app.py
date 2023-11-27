@@ -37,7 +37,7 @@ class workflows(db.Model):
 #     print(f"Opened {workflows.workflow_name} workflow in Chrome successfully.")
 # else:
 #     print(f"Workflow '{workflows.workflow_name}' not found.")
-    
+
 
 @app.route('/home')
 @app.route('/')
