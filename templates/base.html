@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% block head %}{% endblock %}
 
     <title>{% block title %} Automation Workflow {% endblock%}</title>
+        
+    {% block head %}
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/create_workflow.css') }}"> -->
+    {% endblock %}
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,7 +72,9 @@
                 </a> 
             </li>
             <li class="sidebar-list-item">
+                <a href="{{ url_for('manage') }}">
                 <span class="material-icons-outlined">settings_applications</span> Manage Workflows
+                </a>
             </li>
             <li class="sidebar-list-item">
               <span class="material-icons-outlined">settings</span> Settings

@@ -6,16 +6,25 @@
 {% block content %}
         <main class="main-container">   
             <div class="main-title">
-                <h2>Create New Workflow</h2>
+                <h2>Manage Workflows</h2>
             </div>
 
-            <form action="/save_workflow" method="post">
-                <label for="workflow_name">Name Your Workflow:</label><br>
-                <input type="text" id="workflow_name" name="workflow_name"><br><br>
+            <form action="/manage_workflow" method="post">
                 
-                <label for="browser_select">Select Browser:</label><br>
-                <select id="browser_select" name="browser_select">
-                    <option value="Chrome">Chrome</option>
+                <label for="workflow_select">Select Workflow to Manage:</label><br>
+                <select id="workflow_select" name="workflow_select">
+                    <option value="Chrome">select workflow</option>
+                </select><br><br>
+                
+                <label for="change_workflow_name">Change Workflow Name:</label><br>
+                <input type="text" id="change_workflow_name" name="change_workflow_name"><br><br>
+
+                <label for="workflow_select">Select Workflow to Manage:</label><br>
+                <select id="workflow_select" name="workflow_select">
+                    <option value="Chrome">select color</option>
+                    <option value="Chrome">red</option>
+                    <option value="Chrome">blue</option>
+                    <option value="Chrome">green</option>
                 </select><br><br>
                 
                 <div id="urls_container">
@@ -27,12 +36,15 @@
                 </div>
         
                 <button type="button" id="add_url_button">Add Another URL</button><br><br>
-        
-
-                <label for="url_input">Assign Workflow Hotkeys: e.g. Ctrl+Alt+W</label><br>
-                <input type="text" id="url_input" name="url_input"><br><br>
                 
-                <input type="submit" value="Save Workflow">
+
+                <label for="workflow_hotkeys">Add/Change Workflow Hot Keys: e.g. Ctrl+Alt+W</label><br>
+                <input type="text" id="workflow_hotkeys" name="workflow_hotkeys"><br><br>
+                
+                <input type="submit" value="Update Workflow">
+
+                <button type="button" id="btn btn-danger ">Delete Workflow</button><br><br>
+        
             </form>
         </main>
         <script>
@@ -60,4 +72,6 @@
             });
         });
     </script>
+
+        
 {% endblock %}

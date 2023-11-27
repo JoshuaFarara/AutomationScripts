@@ -30,6 +30,7 @@ class Workflow:
         print(f"The {workflow.workflow_name} workflow was built successfully.")
         for url in workflow.website_urls:
             print(url)
+
         return workflow
     
     def save_workflow(self):
@@ -68,13 +69,6 @@ class WorkflowOpener(WorkflowManager):
         self.workflow_manager = workflow_manager
 
     def open_workflow(self, workflow_name):
-        if not workflow_name:
-            print("Workflow name not set. Please set the name first.")
-            return
-        
-        if not self.website_urls:
-            print(f"No URLs added to {workflow_name} workflow yet.")
-            return
         
         workflow_to_open = self.workflow_manager.workflows.get(workflow_name)
         if workflow_to_open:

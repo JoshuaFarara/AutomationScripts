@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 from datetime import datetime
+from Workflows.workflows import Workflow, WorkflowManager, WorkflowOpener
 
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "autowf"
 app.permanent_session_lifetime = timedelta(minutes=5)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///workflows.db'
+db = SQLAlchemy(app)
 
 # class Todo(db.model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -28,15 +29,20 @@ def dashboard():
     return render_template('dashboard.html')
     # return 'Build the dashboard page here.'
 
-@app.route('/createwf')
+@app.route('/createwf') # methods='POST'
 def createwf():
+    # workflow_name = request.form['workflow_name']
+    # urls = request.form.getlist('url')  # Assuming your HTML form input is named 'url'
+
+    # new_workflow = Workflow(workflow_name=workflow_name, website_urls=urls)
+
     return render_template('createwf.html')
     # return "Build the create workflow page here."
 
+
 @app.route('/manage')
 def manage():
-    # return render_template('index.html')
-    return 'Build the dashboard page here.'
+    return render_template('manage.html')
 
 @app.route('/profile')
 def profile():
