@@ -26,6 +26,9 @@ class workflows(db.Model):
         self.website_urls = website_urls
         self.hotkeys = hotkeys
 
+class Workflow_URLS(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    _url = db.Column(db.Integer)
 
 
 @app.route('/home')

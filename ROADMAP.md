@@ -1,15 +1,28 @@
 # ROADMAP  
 
 ## Features:  
+Scheduler/Timer
+
+
 
 #### Necessary updates:  
 
-Add Ability to create workflows with multiple URLs.
+Add Ability to create workflows with Multiple URLs.
 1. Database Updates: Create many to many relationship tables for URLs
+	Resources: Creating Many-To-Many Relationships in Flask-SQLAlchemy
 
 Fix Dashboard UI\UX
 1. Create standardized card sizes
-2. Creat standadardized button sizes
+2. Create standardized button sizes
+
+Pages:
+Homepage
+Dashboard
+Create Workflow
+Manage Workflow
+Settings
+Login
+User
 
 Mobile Responsivity
 1. Make mobile responsive
