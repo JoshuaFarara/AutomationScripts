@@ -14,10 +14,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///workflows.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+workflow_url_junction = db.Table('workflow_url_junction',
+    db.Column('workflows_id', db.Integer, db.ForeignKey('workflows.id')),                                 
+    db.Column('workflow_urls_id', db.Integer, db.ForeignKey('workflow_urls.id')),                                 
+)
+
 class workflows(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workflow_name = db.Column(db.String(100), nullable=False)
-    website_urls = db.Column(db.String(500), nullable=False)
+    website_urls = db.relationship('workflow_urls', secondary=workflow_url_junction, backref='')
     hotkeys = db.Column(db.String(100))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -26,9 +31,11 @@ class workflows(db.Model):
         self.website_urls = website_urls
         self.hotkeys = hotkeys
 
-class Workflow_URLS(db.Model):
+class workflow_urls(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    _url = db.Column(db.Integer)
+    url_name = db.Column(db.String(20))
+    url = db.Column(db.String(100))
+    url_name = db.Column(db.String(20))
 
 
 @app.route('/home')
