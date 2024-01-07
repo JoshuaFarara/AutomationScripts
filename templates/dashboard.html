@@ -20,7 +20,13 @@
                         <h3>Workflow Details:</h3>
                         <ul class="card-list">
                             <li class="card-list-item">
-                                <span>{{ workflow.website_urls }}</span>
+                                <!-- <span>{{ workflow.urls }}</span> -->
+                                <span>Workflow URLs:</span>
+                                <ul>
+                                    {% for url in workflow.urls %}
+                                        <li>{{ url.url }}</li>
+                                    {% endfor %}
+                                </ul>
                             </li>
                             <li class="card-list-item">
                                 <span>{{ workflow.hotkeys }}</span>
@@ -28,7 +34,7 @@
                             <a href="#" class="workflow-link">
                                 <span class="material-icons-outlined">edit</span> Manage Workflow
                             </a>
-                            <a href="#" class="workflow-link" onclick="openWorkflow('{{ workflow.website_urls}}')">
+                            <a href="#" class="workflow-link" onclick="openWorkflow('{{ workflow.urls}}')">
                                 <span class="material-icons-outlined">open_in_browser</span> Open Workflow
                             </a>
                             <a href="/delete/{{ workflow.id }}" class="workflow-link delete-link">
@@ -89,6 +95,9 @@
             function openWorkflow(url) {
                 // Replace this with the actual URL
                 var workflowURL = url; // The URL to be opened in Chrome
+
+                // for url in workflow.urls
+                //     <li>{{ url.url }}</li>
         
                 // Open the URL in Chrome
                 window.open(workflowURL, '_blank');

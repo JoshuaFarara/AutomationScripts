@@ -30,10 +30,11 @@ class workflows(db.Model):
     hotkeys = db.Column(db.String(100))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, workflow_name, urls, hotkeys):
+    def __init__(self, workflow_name, hotkeys, urls):
         self.workflow_name = workflow_name #
-        self.urls = urls
         self.hotkeys = hotkeys
+        self.urls = urls
+        
 
     def __repr__(self):
         return f"workflows(id = {self.id}, workflow_name={self.workflow_name}, website_urls={self.website_urls}, hotkeys={self.hotkeys}, date_created={self.date_created})"
