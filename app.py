@@ -14,28 +14,40 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///workflows.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+
 workflow_url_junction = db.Table('workflow_url_junction',
     db.Column('workflows_id', db.Integer, db.ForeignKey('workflows.id')),                                 
     db.Column('workflow_urls_id', db.Integer, db.ForeignKey('workflow_urls.id')),                                 
 )
 
+
 class workflows(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workflow_name = db.Column(db.String(100), nullable=False)
-    website_urls = db.relationship('workflow_urls', secondary=workflow_url_junction, backref='')
+    # website_urls = db.relationship('workflow_urls', secondary=workflow_url_junction, backref='websites')
+    # website_urls = db.Column(db.String(500), nullable=False)
+    urls = db.relationship('workflow_urls', secondary=workflow_url_junction, backref=db.backref('workflows', lazy='dynamic'))
     hotkeys = db.Column(db.String(100))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, workflow_name, website_urls, hotkeys):
+    def __init__(self, workflow_name, urls, hotkeys):
         self.workflow_name = workflow_name #
-        self.website_urls = website_urls
+        self.urls = urls
         self.hotkeys = hotkeys
+
+    def __repr__(self):
+        return f"workflows(id = {self.id}, workflow_name={self.workflow_name}, website_urls={self.website_urls}, hotkeys={self.hotkeys}, date_created={self.date_created})"
 
 class workflow_urls(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    url_name = db.Column(db.String(20))
-    url = db.Column(db.String(100))
-    url_name = db.Column(db.String(20))
+    # url_name = db.Column(db.String(100))
+    url = db.Column(db.String(500))
+
+    # def __repr__(self):
+    #     return f'<workflow_urls:{self.url}>'
+    def __init__(self, url):
+        # self.url_name = url_name
+        self.url = url
 
 
 @app.route('/home')
@@ -55,10 +67,32 @@ def dashboard():
 def createwf():
     if request.method == 'POST':
         workflow_name = request.form['workflow_name']
-        website_urls = request.form['url_input_1']
-        
         hotkeys = request.form['hotkeys']
-        new_workflow = workflows(workflow_name=workflow_name, website_urls=website_urls, hotkeys=hotkeys)
+        # website_urls = request.form['url_input_1']
+
+        '''
+        VERSION 1
+        '''
+        # add_urls_to_workflow = request.form['url_input_${urlCount}']
+        
+        # new_urls = workflow_urls(url=add_urls_to_workflow)
+        # new_workflow = workflows(workflow_name=workflow_name, website_urls=new_urls, hotkeys=hotkeys)
+        # new_workflow = workflows(workflow_name=workflow_name, website_urls=website_urls, hotkeys=hotkeys)
+
+        '''
+        Version 2
+        '''
+        
+        urls = []
+        url_count = int(request.form['urlCount'])
+
+        for i in range(1, url_count + 1):
+            url_input_name = f'url_input_{i}'
+            url = request.form.get(url_input_name)
+            if url:
+                urls.append(workflow_urls(url=url))
+
+        new_workflow = workflows(workflow_name=workflow_name, hotkeys=hotkeys, urls=urls)
 
         try:
             db.session.add(new_workflow)
