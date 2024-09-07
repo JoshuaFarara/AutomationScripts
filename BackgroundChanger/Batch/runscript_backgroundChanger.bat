@@ -1,4 +1,4 @@
 @echo off
-python "C:\Users\User\Desktop\AutomationScripts\BackgroundChanger\backgroundChangerCall.py"
+python "C:\Users\Joshua Farara\Desktop\AutomationScripts\BackgroundChanger\backgroundChangerCall.py"
 
 
