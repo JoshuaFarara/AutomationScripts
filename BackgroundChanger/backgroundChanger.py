@@ -14,11 +14,11 @@ def background_changer():
     SPI_SETDESKWALLPAPER = 0x0014
 
     # Path to the folder containing the images
-    folder_path = r"C:\Users\User\Desktop\Backgrounds"
+    folder_path = r"C:\Users\Joshua Farara\Desktop\Backgrounds"
     # folder_path = r"C:\Users\User\Desktop\backgroundScriptTESTER"
 
     # Path to the folder where used images will be moved
-    used_images_folder = r"C:\Users\User\Desktop\Backgrounds\UsedBackgrounds"
+    used_images_folder = r"C:\Users\Joshua Farara\Desktop\Backgrounds\UsedBackgrounds"
     # used_images_folder = r"C:\Users\User\Desktop\backgroundScriptTESTER\UsedBackgroundsTESTER"
 
     # Get a list of all image files in the folder ----> next comments explain the list comprehension
